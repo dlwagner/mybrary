@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
 const Author = require('../models/author')
+const { redirect } = require('express/lib/response')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
 
 //All Books route
@@ -91,8 +92,9 @@ router.put('/:id', async (req, res) => {
     } catch {
         if (book != null) {
             renderEditPage(res, book, true)
+        } else {
+            res.redirect('/')
         }
-        renderNewPage(res, book, true)
     }
 })
 
